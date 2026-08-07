@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "metacog-bench"
+version = "1.0.0"
+description = "A Metacognitive Probing & Calibration Evaluation Suite for Frontier LLMs"
+readme = "README.md"
+authors = [{ name = "Applied Cognitive Evaluation Group" }]
+license = { text = "MIT" }
+requires-python = ">=3.9"
+
+dependencies = [
+    "numpy>=1.23.0",
+    "pandas>=1.4.0",
+    "scikit-learn>=1.0.0",
+    "streamlit>=1.30.0",
+    "plotly>=5.0.0"
+]

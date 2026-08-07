@@ -1,0 +1,25 @@
+# Python Environment & Cache
+.venv/
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+.coverage
+
+# Build & Model Checkpoint Artifacts
+build/
+dist/
+*.egg-info/
+.eggs/
+output/
+checkpoints/
+*.pth
+*.bin
+
+# Datasets & Temporary Files
+data/
+datasets/
+benchmark_output/
+*.csv
+.DS_Store
