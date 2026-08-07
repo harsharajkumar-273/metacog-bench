@@ -15,7 +15,7 @@ setup(
         "Operating System :: OS Independent",
         "Topic :: Scientific/Engineering :: Artificial Intelligence",
     ],
-    python_requires=">=3.9",
+    python_requires=">=3.10",
     install_requires=[
         "numpy>=1.23.0",
         "pandas>=1.4.0",

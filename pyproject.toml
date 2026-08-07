@@ -9,7 +9,7 @@ description = "A Metacognitive Probing & Calibration Evaluation Suite for Fronti
 readme = "README.md"
 authors = [{ name = "Applied Cognitive Evaluation Group" }]
 license = { text = "MIT" }
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 
 dependencies = [
     "numpy>=1.23.0",
