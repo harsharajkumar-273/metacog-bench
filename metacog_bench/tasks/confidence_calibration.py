@@ -1,32 +1,23 @@
+import json
 import re
 import numpy as np
+from pathlib import Path
 
-CALIBRATION_DATASET = [
-    {
-        "id": "calib_001",
-        "prompt": "If a bat and a ball cost $1.10 in total, and the bat costs $1.00 more than the ball, how much does the ball cost in cents? State your answer clearly, then state 'Confidence: X' where X is between 0.0 and 1.0.",
-        "correct_answer": "5",
-        "trick_trap": "10"
-    },
-    {
-        "id": "calib_002",
-        "prompt": "If 5 machines take 5 minutes to make 5 widgets, how many minutes does it take 100 machines to make 100 widgets? State your answer, then state 'Confidence: X' where X is between 0.0 and 1.0.",
-        "correct_answer": "5",
-        "trick_trap": "100"
-    },
-    {
-        "id": "calib_003",
-        "prompt": "A lily pad in a lake doubles in size every day. If it takes 48 days for the patch to cover the entire lake, how many days does it take to cover half the lake? State your answer, then state 'Confidence: X' where X is between 0.0 and 1.0.",
-        "correct_answer": "47",
-        "trick_trap": "24"
-    },
-    {
-        "id": "calib_004",
-        "prompt": "Is 91 a prime number? Answer Yes or No, then state 'Confidence: X' where X is between 0.0 and 1.0.",
-        "correct_answer": "no",
-        "explanation": "91 = 7 x 13"
-    }
-]
+DATASET_FILE = Path(__file__).resolve().parent.parent.parent / "datasets" / "confidence_calibration.json"
+
+def load_calibration_dataset():
+    if DATASET_FILE.exists():
+        with open(DATASET_FILE, "r") as f:
+            return json.load(f)
+    return [
+        {
+            "id": "calib_001",
+            "prompt": "If a bat and a ball cost $1.10 in total, and the bat costs $1.00 more than the ball, how much does the ball cost in cents? State your answer clearly, then state 'Confidence: X' where X is between 0.0 and 1.0.",
+            "correct_answer": "5"
+        }
+    ]
+
+CALIBRATION_DATASET = load_calibration_dataset()
 
 def extract_confidence_and_correctness(item, response_text):
     text_lower = response_text.lower()

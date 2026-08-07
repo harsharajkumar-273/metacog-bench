@@ -14,19 +14,29 @@ st.set_page_config(
     layout="wide"
 )
 
-st.title("🧠 MetaCog-Bench: Metacognitive Evaluation Suite")
+st.title("🧠 MetaCog-Bench: Dynamic LLM Evaluation Suite")
 st.markdown("""
-Evaluating Frontier Large Language Models on **Metacognitive Calibration**, **Epistemic Horizon Humility**, and **Planted Flaw Auditing**.
+Evaluating Frontier LLMs on **Metacognitive Calibration**, **Epistemic Horizon Humility**, and **Planted Flaw Auditing**.
 *Target Track: Google DeepMind AGI Hackathon - Metacognition Track.*
 """)
 
-st.sidebar.header("⚙️ Evaluation Settings")
-selected_view = st.sidebar.radio("Navigation", ["Leaderboard & Comparative Analytics", "Live Interactive Model Inspector"])
+# Sidebar LLM API Configuration
+st.sidebar.header("🔌 Live LLM API Configuration")
+provider = st.sidebar.selectbox("Select LLM Provider", ["mock", "gemini", "openai", "anthropic", "ollama"])
 
-# Mock Benchmark Leaderboard Data
+api_key = None
+if provider in ["gemini", "openai", "anthropic"]:
+    api_key = st.sidebar.text_input(f"Enter {provider.upper()} API Key", type="password")
+
+model_name_input = st.sidebar.text_input("Custom Model Name (Optional)", value="")
+
+selected_view = st.sidebar.radio("Navigation", ["Leaderboard & Analytics", "Run Live API Evaluation", "Interactive Task Inspector"])
+
+# Mock Leaderboard Data
 MODEL_DATA = [
     {
         "Model": "Gemini 2.0 Flash (Reasoning)",
+        "Provider": "Google",
         "MetaCog Index (MBI)": 79.12,
         "Epistemic Accuracy (%)": 60.0,
         "Expected Calibration Error (ECE)": 0.1625,
@@ -35,6 +45,7 @@ MODEL_DATA = [
     },
     {
         "Model": "Claude 3.5 Sonnet",
+        "Provider": "Anthropic",
         "MetaCog Index (MBI)": 84.50,
         "Epistemic Accuracy (%)": 80.0,
         "Expected Calibration Error (ECE)": 0.1120,
@@ -43,6 +54,7 @@ MODEL_DATA = [
     },
     {
         "Model": "GPT-4o (Base Instruction)",
+        "Provider": "OpenAI",
         "MetaCog Index (MBI)": 68.30,
         "Epistemic Accuracy (%)": 40.0,
         "Expected Calibration Error (ECE)": 0.2450,
@@ -53,7 +65,7 @@ MODEL_DATA = [
 
 df_leaderboard = pd.DataFrame(MODEL_DATA)
 
-if selected_view == "Leaderboard & Comparative Analytics":
+if selected_view == "Leaderboard & Analytics":
     st.subheader("🏆 Metacognition Leaderboard")
     st.dataframe(df_leaderboard.sort_values(by="MetaCog Index (MBI)", ascending=False), use_container_width=True)
 
@@ -86,9 +98,28 @@ if selected_view == "Leaderboard & Comparative Analytics":
         fig_calib.update_layout(xaxis_title="Stated Confidence Score", yaxis_title="Actual Answer Accuracy", title="Expected Calibration Error (ECE) Reliability Curve")
         st.plotly_chart(fig_calib, use_container_width=True)
 
-elif selected_view == "Live Interactive Model Inspector":
-    st.subheader("🔬 Live Task Evaluator Sandbox")
-    task_choice = st.selectbox("Select Task Probing Module", ["Task 1: Epistemic Boundary", "Task 2: Confidence Calibration", "Task 3: Planted Error Auditing"])
+elif selected_view == "Run Live API Evaluation":
+    st.subheader("⚡ Live Model Evaluation Harness")
+    st.markdown(f"Running benchmark evaluation against **Provider: `{provider.upper()}`**")
+
+    if st.button("🚀 Execute Live Benchmark Evaluation"):
+        with st.spinner(f"Querying {provider.upper()} API across all task prompts..."):
+            evaluator = MetaCogEvaluator(provider=provider, api_key=api_key, model_name=model_name_input or None)
+            res = evaluator.evaluate_live_llm()
+            
+            st.success("✅ Evaluation Complete!")
+            
+            m1, m2, m3, m4 = st.columns(4)
+            m1.metric("MetaCog Index (MBI)", f"{res['metacog_benchmark_index']:.2f} / 100")
+            m2.metric("Epistemic Refusal", f"{res['epistemic_accuracy'] * 100:.1f}%")
+            m3.metric("Expected Calibration Error (ECE)", f"{res['expected_calibration_error']:.4f}")
+            m4.metric("Error Auditing", f"{res['error_auditing_accuracy'] * 100:.1f}%")
+            
+            st.json(res)
+
+elif selected_view == "Interactive Task Inspector":
+    st.subheader("🔬 Prompt & Task Inspector")
+    task_choice = st.selectbox("Select Task Module", ["Task 1: Epistemic Boundary", "Task 2: Confidence Calibration", "Task 3: Planted Error Auditing"])
 
     if task_choice == "Task 1: Epistemic Boundary":
         st.markdown("### Task 1: Non-Existent Entity Hallucination Probing")
