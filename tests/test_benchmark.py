@@ -44,7 +44,7 @@ def test_error_auditing():
     assert res["detected_step"] == 5
 
 def test_evaluator_harness():
-    evaluator = MetaCogEvaluator(model_name="Test-Model")
+    evaluator = MetaCogEvaluator(provider="mock", model_name="Test-Model")
     mock_epistemic = ["does not exist", "ozone layer", "does not exist", "arthur ashkin", "does not exist"]
     mock_calib = ["5 cents. Confidence: 0.9", "5 minutes. Confidence: 0.8", "47 days. Confidence: 0.9", "no. Confidence: 0.9"]
     mock_audit = ["Flawed Step: 5", "Flawed Step: 3"]
