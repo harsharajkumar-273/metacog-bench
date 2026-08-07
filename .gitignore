@@ -17,9 +17,6 @@ checkpoints/
 *.pth
 *.bin
 
-# Datasets & Temporary Files
-data/
-datasets/
+# Exclude temp outputs except tracked datasets
 benchmark_output/
-*.csv
 .DS_Store

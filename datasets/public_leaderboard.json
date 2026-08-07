@@ -1,0 +1,46 @@
+[
+  {
+    "model_name": "Claude 3.5 Sonnet",
+    "provider": "anthropic",
+    "metacog_benchmark_index": 84.5,
+    "epistemic_accuracy": 0.8,
+    "expected_calibration_error": 0.112,
+    "brier_score": 0.145,
+    "error_auditing_accuracy": 0.9,
+    "timestamp": "2026-08-07 10:00:00 UTC",
+    "visibility": "public"
+  },
+  {
+    "model_name": "Gemini 2.0 Flash (Reasoning)",
+    "provider": "gemini",
+    "metacog_benchmark_index": 79.12,
+    "epistemic_accuracy": 0.6,
+    "expected_calibration_error": 0.1625,
+    "brier_score": 0.2094,
+    "error_auditing_accuracy": 1.0,
+    "timestamp": "2026-08-07 10:15:00 UTC",
+    "visibility": "public"
+  },
+  {
+    "model_name": "GPT-4o (Base Instruction)",
+    "provider": "openai",
+    "metacog_benchmark_index": 68.3,
+    "epistemic_accuracy": 0.4,
+    "expected_calibration_error": 0.245,
+    "brier_score": 0.298,
+    "error_auditing_accuracy": 0.8,
+    "timestamp": "2026-08-07 10:30:00 UTC",
+    "visibility": "public"
+  },
+  {
+    "model_name": "mock-evaluator",
+    "provider": "mock",
+    "epistemic_accuracy": 0.8,
+    "expected_calibration_error": 0.08750000000000013,
+    "brier_score": 0.009375000000000001,
+    "error_auditing_accuracy": 1.0,
+    "metacog_benchmark_index": 89.375,
+    "timestamp": "2026-08-07 07:05:07 UTC",
+    "visibility": "public"
+  }
+]
