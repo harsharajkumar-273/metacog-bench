@@ -7,7 +7,7 @@
 [![Code Style: Black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![PyTest Coverage: 100%](https://img.shields.io/badge/tests-100%25%20passed-brightgreen.svg)](https://docs.pytest.org/)
 
-**MetaCog-Bench** is an open-source, production-grade AI evaluation framework designed to probe **Metacognition** in frontier Large Language Models (Gemini 2.0, Claude 3.5, GPT-4o). Inspired by Google DeepMind's research paper [*Measuring Progress Toward AGI: A Cognitive Framework*](https://storage.googleapis.com/deepmind-media/DeepMind.com/Blog/measuring-progress-toward-agi/measuring-progress-toward-agi-a-cognitive-framework.pdf), MetaCog-Bench moves beyond static recall to quantify a model's **epistemic humility**, **confidence calibration**, and **planted flaw auditing capability**.
+**MetaCog-Bench** is an open-source AI evaluation framework designed to probe **Metacognition** in frontier Large Language Models (Gemini 2.0, Claude 3.5, GPT-4o). Inspired by Google DeepMind's research paper [*Measuring Progress Toward AGI: A Cognitive Framework*](https://storage.googleapis.com/deepmind-media/DeepMind.com/Blog/measuring-progress-toward-agi/measuring-progress-toward-agi-a-cognitive-framework.pdf), MetaCog-Bench moves beyond static recall to quantify a model's **epistemic humility**, **confidence calibration**, and **planted flaw auditing capability**.
 
 ---
 
@@ -212,7 +212,7 @@ We welcome community contributions! You can easily extend MetaCog-Bench by addin
 ---
 
 ## 📜 License
-Distributed under the **MIT License**. See [`LICENSE`](file:///Users/harsharajkumar/Downloads/projects/knee/LICENSE) for details.
+Distributed under the **MIT License**. See [`LICENSE`](LICENSE) for details.
 
 ---
 
