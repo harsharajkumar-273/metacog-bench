@@ -2,10 +2,9 @@
 
 [![Python 3.9+](https://img.shields.io/badge/python-3.9%2B-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Framework: Google DeepMind AGI](https://img.shields.io/badge/Framework-Google%20DeepMind%20AGI-green.svg)](https://storage.googleapis.com/deepmind-media/DeepMind.com/Blog/measuring-progress-toward-agi/measuring-progress-toward-agi-a-cognitive-framework.pdf)
+[![Built for: Kaggle AGI hackathon](https://img.shields.io/badge/Built%20for-Kaggle%20%C3%97%20DeepMind%20AGI%20hackathon-green.svg)](https://storage.googleapis.com/deepmind-media/DeepMind.com/Blog/measuring-progress-toward-agi/measuring-progress-toward-agi-a-cognitive-framework.pdf)
 [![Streamlit: Dashboard](https://img.shields.io/badge/Streamlit-Interactive%20UI-FF4B4B.svg)](https://streamlit.io/)
 [![Code Style: Black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
-[![PyTest Coverage: 100%](https://img.shields.io/badge/tests-100%25%20passed-brightgreen.svg)](https://docs.pytest.org/)
 
 **MetaCog-Bench** is an open-source AI evaluation framework designed to probe **Metacognition** in frontier Large Language Models (Gemini 2.0, Claude 3.5, GPT-4o). Inspired by Google DeepMind's research paper [*Measuring Progress Toward AGI: A Cognitive Framework*](https://storage.googleapis.com/deepmind-media/DeepMind.com/Blog/measuring-progress-toward-agi/measuring-progress-toward-agi-a-cognitive-framework.pdf), MetaCog-Bench moves beyond static recall to quantify a model's **epistemic humility**, **confidence calibration**, and **planted flaw auditing capability**.
 
@@ -45,7 +44,7 @@ graph TD
     F --> G
 
     G --> H[Interactive Streamlit Web Dashboard<br/>app.py]
-    G --> I[Global Public Leaderboard Registry<br/>datasets/public_leaderboard.json]
+    G --> I[Local leaderboard file<br/>datasets/public_leaderboard.json]
 ```
 
 ---
@@ -91,7 +90,7 @@ $$\text{MBI} = \left( 0.40 \cdot \text{Acc}_{\text{Epistemic}} + 0.30 \cdot (1.0
 
 - **🔐 Dual-Session Evaluation Architecture**:
   - 🔒 **Private Sandbox Session**: Runs evaluations locally in your browser session without exposing scores or prompt responses.
-  - 🌐 **Public Leaderboard Submission**: Publishes verified evaluation scores to the persistent community leaderboard registry (`datasets/public_leaderboard.json`), updating global model ranks, radar charts, and ECE curves.
+  - 🌐 **Public Leaderboard Submission**: Appends evaluation scores to a local leaderboard file (`datasets/public_leaderboard.json`) that drives the dashboard's rankings, radar charts, and ECE curves.
 
 - **📊 Interactive Streamlit Web Dashboard (`app.py`)**:
   - Live model rank leaderboard table.
@@ -100,7 +99,7 @@ $$\text{MBI} = \left( 0.40 \cdot \text{Acc}_{\text{Epistemic}} + 0.30 \cdot (1.0
   - Real-time prompt evaluator sandbox & model inspector.
 
 - **🧪 Automated PyTest Test Suite (`tests/test_benchmark.py`)**:
-  - 100% test coverage across dataset loaders, regex extractors, ECE math, and evaluator harness.
+  - Unit tests for the dataset loaders, regex extractors, ECE math, and evaluator harness (coverage not measured).
 
 ---
 
@@ -146,15 +145,15 @@ pytest tests/ -vv
 
 ---
 
-## 🏆 Public Benchmark Leaderboard
+## 🏆 Results status
 
-Evaluations registered on the global community leaderboard:
+**No verified results yet.** The entries in `datasets/public_leaderboard.json` aren't backed by saved model outputs, and the bundled datasets are still tiny (5 epistemic-boundary items, 4 calibration items, 2 error-auditing items), too few to produce a score like 90% on error auditing. Treat those entries as sample data.
 
-| Rank | Model Name | Provider | MetaCog Index (MBI) | Epistemic Refusal | ECE Error ($\downarrow$) | Error Auditing |
-| :---: | :--- | :---: | :---: | :---: | :---: | :---: |
-| 🥇 | **Claude 3.5 Sonnet** | Anthropic | **84.50%** | 80.0% | 0.1120 | 90.0% |
-| 🥈 | **Gemini 2.0 Flash (Reasoning)** | Google | **79.12%** | 60.0% | 0.1625 | 100.0% |
-| 🥉 | **GPT-4o (Base Instruction)** | OpenAI | **68.30%** | 40.0% | 0.2450 | 80.0% |
+Next steps before publishing any numbers:
+
+1. Grow each task to at least 100 items.
+2. Run each model with a fixed prompt, temperature, and seed, and save the raw responses.
+3. Report every metric with a bootstrap confidence interval.
 
 ---
 
@@ -177,7 +176,7 @@ metacog-bench/
 │   ├── epistemic_boundary.json
 │   ├── confidence_calibration.json
 │   ├── error_auditing.json
-│   └── public_leaderboard.json    # Persistent Community Registry
+│   └── public_leaderboard.json    # Local leaderboard file (sample entries)
 ├── tests/                         # PyTest Unit Test Suite
 │   ├── __init__.py
 │   └── test_benchmark.py
@@ -185,7 +184,7 @@ metacog-bench/
 ├── run_benchmark.py               # CLI Evaluation Runner
 ├── setup.py                       # Setuptools Package Configuration
 ├── pyproject.toml                 # PEP 517/518 Build Specification
-├── writeup.md                     # Google DeepMind AGI Hackathon Research Paper
+├── writeup.md                     # Hackathon write-up
 ├── README.md                      # GitHub Documentation
 ├── LICENSE                        # MIT Open Source License
 └── .gitignore                     # Git Exclusion Rules
@@ -221,7 +220,7 @@ If you use **MetaCog-Bench** in your AI evaluation research or portfolio, please
 
 ```bibtex
 @software{metacog_bench2026,
-  author = {Harsharajkumar and Applied Cognitive Evaluation Group},
+  author = {Raj Kumar, Harsha},
   title = {MetaCog-Bench: Evaluating Frontier LLMs on Metacognitive Calibration, Epistemic Horizon Humility, and Planted Flaw Auditing},
   year = {2026},
   publisher = {GitHub},
